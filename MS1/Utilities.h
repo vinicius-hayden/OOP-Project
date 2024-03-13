@@ -23,6 +23,8 @@ namespace seneca {
             
             static void setDelimiter(char newDelimiter);
             static char getDelimiter() const
+
+            string& trim(string& str) 
         ;
     }
 }
