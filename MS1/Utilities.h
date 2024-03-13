@@ -26,7 +26,7 @@ namespace seneca {
 
             string& trim(string& str) 
         ;
-    }
+    };
 }
 
 #endif // SENECA_UTILITIES_H
