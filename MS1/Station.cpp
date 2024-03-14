@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 #include "Utilities.h"
 #include "Station.h"
@@ -6,29 +7,30 @@
 using namespace std;
 namespace seneca {
 
-    Station::Station(const string& record) {
-        Utilities util;
-        size_t next_pos = 0;
-        bool more = true;
+    Station::Station(const std::string& src) {
+        try {
+            Utilities utilities;
+            bool check = false;
+            size_t position = 0;
+            
+            m_itemName = utilities.extractToken(src, position, check);
+            m_widthField = std::max(m_widthField, m_itemName.size());
+            utilities.setFieldWidth(m_widthField);
 
-        string itemName = util.extractToken(record, next_pos, more);
-        size_t startingSerial = stoul(util.extractToken(record, next_pos, more));
-        size_t quantity = stoul(util.extractToken(record, next_pos, more));
-        string description = util.extractToken(record, next_pos, more);
-
-        m_item = itemName;
-        m_serialNumber = startingSerial;
-        m_quantity = quantity;
-
-        if (m_item.length() > m_widthField)
-            m_widthField = m_item.length();
-        if (m_item.length() > Utilities::m_widthField)
-            Utilities::m_widthField = m_item.length();
-
-        m_description = description;
-
-        m_id = id_generator++;
+            if (check) {
+                m_nextSerialNumber = std::stoi(utilities.extractToken(src, position, check));
+                m_qtyItems = std::stoi(utilities.extractToken(src, position, check));
+                
+                m_description = utilities.extractToken(src, position, check);
+                
+                m_id = id_generator++;
+            }
+        } 
+        catch (const char* msg) {
+            std::cerr << "Error: " << msg << std::endl;
+        }
     }
+
 
     const string& Station::getItemName() const {
         return m_itemName;
@@ -36,7 +38,7 @@ namespace seneca {
 
     size_t Station::getNextSerialNumber() {
         m_nextSerialNumber++;
-        return m_nextSerialNumber;
+        return m_nextSerialNumber - 1;
     }
 
     size_t Station::getQuantity() const {
@@ -44,7 +46,7 @@ namespace seneca {
     }
 
     void Station::updateQuantity() {
-        if (getQuantity >= 1) {
+        if (getQuantity() >= 1) {
             m_qtyItems--;
         }
     }

@@ -13,8 +13,8 @@
 
 namespace seneca {
     class Utilities {
-            size_t m_widthField{};
-            static char m_delimiter{};
+            size_t m_widthField{ 1 };
+            static char m_delimiter;
         public:
             Utilities() = default;
             void setFieldWidth(size_t newWidth);
@@ -22,9 +22,9 @@ namespace seneca {
             std::string extractToken(const std::string& str, size_t& next_pos, bool& more);
             
             static void setDelimiter(char newDelimiter);
-            static char getDelimiter() const
+            static char getDelimiter();
 
-            string& trim(string& str) 
+            string& trim(string& str);
         ;
     };
 }

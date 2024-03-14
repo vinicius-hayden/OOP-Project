@@ -29,7 +29,7 @@ namespace seneca {
 
 		str = str.substr(start, end - start);
 		return str; 
-	};
+	}
 
     void Utilities::setFieldWidth(size_t newWidth) {
         m_widthField = newWidth;
@@ -39,11 +39,11 @@ namespace seneca {
         return m_widthField;
     }
 
-    static void setDelimiter(char newDelimiter) {
+    static void Utilities::setDelimiter(char newDelimiter) {
         m_delimiter = newDelimiter;
     }
 
-    static char getDelimiter() const {
+    static char Utilities::getDelimiter() const {
         return m_delimiter;
     }
 
