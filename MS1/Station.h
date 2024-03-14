@@ -12,7 +12,7 @@
 namespace seneca {
     class Station {
             int m_id{};
-            std::string m_item{};
+            std::string m_itemName{};
             std::string m_description{};
             int m_nextSerialNumber{};
             int m_qtyItems{};
