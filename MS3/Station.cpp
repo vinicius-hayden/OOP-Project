@@ -21,7 +21,7 @@ namespace seneca {
     Station::Station(const std::string& src) {
         try {
             Utilities utilities;
-            bool check = false;
+            bool check = true;
             size_t position = 0;
             
             m_itemName = utilities.extractToken(src, position, check);
